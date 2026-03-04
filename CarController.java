@@ -74,4 +74,41 @@ public class CarController {
         model.addAttribute("member", user);
         return "car/mypage"; 
     }
+    
+ // 비밀번호 수정 페이지로 이동
+    @GetMapping("/mypage/edit")
+    public String editPasswordForm(HttpSession session) {
+        // 로그인 안 되어 있으면 로그인 페이지로
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+        return "car/edit-password"; // templates/car/edit-password.html
+    }
+
+    // 비밀번호 수정 처리
+    @PostMapping("/mypage/edit")
+    public String updatePassword(String currentPassword, String newPassword, HttpSession session, org.springframework.ui.Model model) {
+        // 1. 세션에서 현재 로그인한 유저 정보 가져오기
+        CarMemberDTO sessionUser = (CarMemberDTO) session.getAttribute("user");
+        
+        if (sessionUser == null) return "redirect:/login";
+
+        // 2. 현재 비밀번호가 맞는지 검사
+        if (!sessionUser.getPassword().equals(currentPassword)) {
+            model.addAttribute("error", "현재 비밀번호가 일치하지 않습니다.");
+            return "car/edit-password"; // 틀리면 다시 수정 페이지로
+        }
+
+        // 3. 새 비밀번호 설정 및 DB 저장
+        // sessionUser는 영속성 컨텍스트에 연결된 상태가 아닐 수 있으므로 리포지토리에서 다시 조회 권장
+        CarMemberDTO dbUser = carmemberRepository.findByEmail(sessionUser.getEmail());
+        dbUser.setPassword(newPassword);
+        carmemberRepository.save(dbUser); // ID가 존재하므로 UPDATE 쿼리 실행됨
+
+        // 4. 세션 정보 갱신 (비밀번호가 바뀌었으므로)
+        session.setAttribute("user", dbUser);
+
+        // 5. 성공 후 마이페이지로 리다이렉트 (성공 메시지 전달용 파라미터 추가)
+        return "redirect:/mypage?success=true";
+    }
 }
