@@ -5,10 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CarController {
+	
+	@GetMapping("/agree")
+	public String showPrivacy() {
+	    return "car/agree"; // 개인정보 동의 페이지 호출
+	}
 
     @GetMapping("/")
     public String home() {
-    	return "car/index"; // templates 폴더 안 car 폴더 안에 들어있는 index.html
+    	return "car/index"; 
     }
 
     @GetMapping("/login")
@@ -17,7 +22,7 @@ public class CarController {
     }
 
     @GetMapping("/signup")
-    public String signup() {
-        return "car/signup";
+    public String showSignupForm() {
+        return "car/signup"; // 실제 회원가입 양식 페이지 호출
     }
 }
