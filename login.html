@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xml:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+<title>로그인 | AutoAuction</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-box">
+            <h1 class="logo" onclick="location.href='/'">Auto<span>Auction</span></h1>
+            <h2>반가워요! 다시 오셨군요.</h2>
+            
+            <form action="/login" method="post">
+                <div class="input-group">
+                    <label for="email">이메일 주소</label>
+                    <input type="email" id="email" name="username" placeholder="example@auto.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                </div>
+
+                <div class="auth-options">
+                    <label><input type="checkbox"> 로그인 상태 유지</label>
+                    <a href="#">비밀번호 찾기</a>
+                </div>
+
+                <button type="submit" class="btn-auth">로그인</button>
+            </form>
+
+            <p class="auth-footer">
+                계정이 없으신가요? <a href="/signup.html">회원가입 하기</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
