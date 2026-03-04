@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 | AutoAuction</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+	<link rel="stylesheet" th:href="@{/css/mypage.css}">
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-box">
+            <h1 class="logo" onclick="location.href='/'" style="cursor:pointer">
+                Auto<span>Auction</span>
+            </h1>
+            <h2>내 정보 확인</h2>
+            <p>회원님의 소중한 정보를 확인하세요.</p>
+
+            <div class="info-container">
+                <div class="info-item">
+                    <div class="info-label">사용자 이름</div>
+                    <div class="info-value" th:text="${member.name}">홍길동</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">이메일 계정</div>
+                    <div class="info-value" th:text="${member.email}">example@email.com</div>
+                </div>
+            </div>
+
+            <div class="mypage-btns">
+                <button type="button" class="btn-auth btn-home" onclick="location.href='/'">메인으로</button>
+                <button type="button" class="btn-auth btn-logout" onclick="location.href='/logout'">로그아웃</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
