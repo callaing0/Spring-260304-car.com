@@ -1,44 +1,62 @@
 <!DOCTYPE html>
-<html xml:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
-<title>로그인 | AutoAuction</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoAuction | Spring Boot Project</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="stylesheet" th:href="@{/css/auth.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="auth-wrapper">
-        <div class="auth-box">
-            <h1 class="logo" onclick="location.href='/'">Auto<span>Auction</span></h1>
-            <h2>반가워요! 다시 오셨군요.</h2>
-            
-            <form action="/login" method="post">
-                <div class="input-group">
-                    <label for="email">이메일 주소</label>
-                    <input type="email" id="email" name="username" placeholder="example@auto.com" required>
-                </div>
-                
-                <div class="input-group">
-                    <label for="password">비밀번호</label>
-                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
-                </div>
-
-                <div class="auth-options">
-                    <label><input type="checkbox"> 로그인 상태 유지</label>
-                    <a href="#">비밀번호 찾기</a>
-                </div>
-
-                <button type="submit" class="btn-auth">로그인</button>
-            </form>
-
-            <p class="auth-footer">
-                계정이 없으신가요? <a href="/signup.html">회원가입 하기</a>
-            </p>
+    <header>
+        <div class="container">
+            <h1 class="logo" onclick="location.href='/'" style="cursor:pointer">Auto<span>Auction</span></h1>
+            <nav>
+                <ul>
+                    <li><a href="/auctions">경매물건</a></li>
+                    <li><a href="/sell">내 차 팔기</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn-login" onclick="location.href='/login'">로그인</button>
+                <button class="btn-signup" onclick="location.href='/agree'">회원가입</button>
+            </div>
         </div>
-    </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>스프링 기반의 안전한<br>자동차 경매 시스템</h2>
+            <p>신뢰할 수 있는 데이터와 실시간 입찰 시스템</p>
+            <form action="/search" method="get" class="search-bar">
+                <input type="text" name="keyword" placeholder="모델명을 입력하세요">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="hot-items container">
+        <h3>오늘의 추천 매물</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="image-box">CAR IMAGE</div>
+                <div class="card-info">
+                    <h4>현대 더 뉴 그랜저</h4>
+                    <p class="price">현재가: 2,800만원</p>
+                    <button class="btn-bid" onclick="location.href='/auction/1'">상세보기</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="image-box">CAR IMAGE</div>
+                <div class="card-info">
+                    <h4>기아 K8 하이브리드</h4>
+                    <p class="price">현재가: 3,200만원</p>
+                    <button class="btn-bid" onclick="location.href='/auction/2'">상세보기</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
